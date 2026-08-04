@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MakerSpaceHub+ - Equipment Catalog</title>
+  </head>
+  <body>
+    <h1>MakerSpaceHub+</h1>
+    <h2>Equipment Catalog</h2>
+
+    <form>
+      <label for="search">Search Equipment:</label><br />
+      <input
+        type="text"
+        id="search"
+        name="search"
+        placeholder="3D Printer, Laser Cutter..."
+      /><br /><br />
+
+      <p>
+        Prusa MK4 — 3D Printer — Available
+        <a href="reservation.html">
+          <button type="button" onclick="selectEquipment('Prusa MK4')">
+            Reserve
+          </button>
+        </a>
+      </p>
+
+      <p>
+        Soldering Station 1 — Available
+        <a href="reservation.html">
+          <button
+            type="button"
+            onclick="selectEquipment('Soldering Station 1')"
+          >
+            Reserve
+          </button>
+        </a>
+      </p>
+
+      <p>
+        Glowforge Pro — Laser Cutter — Maintenance
+        <a href="reservation.html">
+          <button type="button" onclick="selectEquipment('Glowforge Pro')">
+            Reserve
+          </button>
+        </a>
+      </p>
+    </form>
+    <script>
+      // Function to identify the selected equipment and store it in localStorage
+      function selectEquipment(equipmentName) {
+        localStorage.setItem("selectedEquipment", equipmentName);
+      }
+    </script>
+  </body>
+</html>

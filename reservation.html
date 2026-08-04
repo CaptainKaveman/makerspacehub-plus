@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MakerSpaceHub+ - Reserve Equipment</title>
+  </head>
+  <body>
+    <h1>MakerSpaceHub+</h1>
+    <h2>Reserve Equipment</h2>
+
+    <form>
+      <p>Equipment:</p>
+      <div id="equipment"></div>
+      <br />
+
+      <label for="date">Date:</label><br />
+      <input type="date" id="date" name="date" /><br /><br />
+
+      <label for="startTime">Start Time:</label><br />
+      <input type="time" id="startTime" name="startTime" /><br /><br />
+
+      <label for="endTime">End Time:</label><br />
+      <input type="time" id="endTime" name="endTime" /><br /><br />
+      <button type="button" onclick="confirmReservation()">
+        Confirm Reservation
+      </button>
+    </form>
+    <script>
+      // Retrieve the selected equipment from localStorage and populate the equipment field
+      const savedEquipment = localStorage.getItem("selectedEquipment");
+      document.getElementById("equipment").textContent = savedEquipment;
+
+      // Function to confirm the reservation and store it in localStorage
+      function confirmReservation() {
+        const equipment = document.getElementById("equipment").textContent;
+        const date = document.getElementById("date").value;
+        const startTime = document.getElementById("startTime").value;
+        const endTime = document.getElementById("endTime").value;
+
+        if (
+          date.trim() === "" ||
+          startTime.trim() === "" ||
+          endTime.trim() === ""
+        ) {
+          alert("Please enter all required fields before confirming.");
+          return;
+        }
+
+        const reservation = {
+          equipment: equipment,
+          date: date,
+          startTime: startTime,
+          endTime: endTime,
+          status: "Confirmed",
+        };
+
+        localStorage.setItem("reservation", JSON.stringify(reservation));
+        window.location.href = "confirmation.html";
+      }
+    </script>
+  </body>
+</html>

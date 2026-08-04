@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MakerSpaceHub+ - Confirmation</title>
+  </head>
+  <body>
+    <h1>MakerSpaceHub+</h1>
+    <h2>Reservation Confirmed:</h2>
+
+    <form>
+      <div id="confirmEquipment"></div>
+      <div id="confirmDate"></div>
+      <div id="confirmStartTime"></div>
+      <div id="confirmEndTime"></div>
+      <div id="confirmStatus"></div>
+      <br /><br />
+
+      <a href="catalog.html">
+        <button type="button">Return to Catalog</button>
+      </a>
+    </form>
+    <script>
+      // Function to format time from 24-hour to 12-hour format with AM/PM
+      function formatTime(rawTime) {
+        const time = rawTime.split(":");
+        let hour = Number(time[0]);
+        const minute = time[1];
+        let formattedTime;
+
+        if (hour < 12) {
+          if (hour === 0) {
+            hour = 12; // Midnight case
+          }
+          formattedTime = `${hour}:${minute} AM`;
+        } else if (hour > 12) {
+          hour -= 12;
+          formattedTime = `${hour}:${minute} PM`;
+        } else {
+          formattedTime = `${hour}:${minute} PM`; // Noon case
+        }
+        return formattedTime;
+      }
+
+      // Function to display reservation details on the confirmation page
+      function displayReservationDetails() {
+        const reservation = JSON.parse(localStorage.getItem("reservation"));
+        if (reservation) {
+          // Format the date to MM/DD/YYYY
+          const date = reservation.date.split("-");
+          const year = date[0];
+          const month = date[1];
+          const day = date[2];
+          const formattedDate = `${month}/${day}/${year}`;
+
+          document.getElementById("confirmEquipment").textContent =
+            `Equipment: ${reservation.equipment}`;
+          document.getElementById("confirmDate").textContent =
+            `Date: ${formattedDate}`;
+          document.getElementById("confirmStartTime").textContent =
+            `Start Time: ${formatTime(reservation.startTime)}`;
+          document.getElementById("confirmEndTime").textContent =
+            `End Time: ${formatTime(reservation.endTime)}`;
+          document.getElementById("confirmStatus").textContent =
+            `Status: ${reservation.status}`;
+        }
+      }
+      displayReservationDetails();
+    </script>
+  </body>
+</html>
