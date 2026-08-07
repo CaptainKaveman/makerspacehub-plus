@@ -21,7 +21,7 @@
       <p>
         Prusa MK4 — 3D Printer — Available
         <a href="reservation.html">
-          <button type="button" onclick="selectEquipment('Prusa MK4')">
+          <button type="button" onclick="selectEquipment('Prusa MK4', 'Available', event)">
             Reserve
           </button>
         </a>
@@ -32,7 +32,7 @@
         <a href="reservation.html">
           <button
             type="button"
-            onclick="selectEquipment('Soldering Station 1')"
+            onclick="selectEquipment('Soldering Station 1', 'Available', event)"
           >
             Reserve
           </button>
@@ -42,7 +42,7 @@
       <p>
         Glowforge Pro — Laser Cutter — Maintenance
         <a href="reservation.html">
-          <button type="button" onclick="selectEquipment('Glowforge Pro')">
+          <button type="button" onclick="selectEquipment('Glowforge Pro', 'Maintenance', event)">
             Reserve
           </button>
         </a>
@@ -50,8 +50,13 @@
     </form>
     <script>
       // Function to identify the selected equipment and store it in localStorage
-      function selectEquipment(equipmentName) {
-        localStorage.setItem("selectedEquipment", equipmentName);
+      function selectEquipment(equipmentName, status, event) {
+        if (status === 'Maintenance') {
+          alert("This equipment is currently being repaired.")
+          event.preventDefault(); // Prevent navigation to reservation.html
+        } else {
+          localStorage.setItem("selectedEquipment", equipmentName);
+        }
       }
     </script>
   </body>
